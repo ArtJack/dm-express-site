@@ -15,11 +15,11 @@ export const company = {
   name: "DM Express",
   location: "Lincoln, CA",
   fullLocation: "Lincoln, California",
-  mcNumber: "MC#1234567",
-  dotNumber: "DOT#1234567",
-  phoneDisplay: "(555) 123-4567",
-  phoneHref: "tel:+15551234567",
-  email: "hello@dmexpress.example.com",
+  mcNumber: `MC#${import.meta.env.VITE_COMPANY_MC_NUM ?? "1234567"}`,
+  dotNumber: `DOT#${import.meta.env.VITE_COMPANY_DOT_NUM ?? "1234567"}`,
+  phoneDisplay: import.meta.env.VITE_COMPANY_PHONE_DISPLAY ?? "(555) 123-4567",
+  phoneHref: import.meta.env.VITE_COMPANY_PHONE_HREF ?? "tel:+15551234567",
+  email: import.meta.env.VITE_COMPANY_EMAIL ?? "hello@dmexpress.example.com",
 };
 
 export const navItems = [

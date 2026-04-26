@@ -2,3 +2,10 @@ node_modules/
 dist/
 .DS_Store
 *.log
+
+# local secrets — real client data lives here, never committed
+.env
+.env.*
+!.env.example
+.env.local
+.env.*.local
