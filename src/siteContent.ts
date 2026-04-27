@@ -13,8 +13,10 @@ import {
 
 export const company = {
   name: "DM Express",
-  location: "Lincoln, CA",
-  fullLocation: "Lincoln, California",
+  registeredLocation: "Nicholasville, KY",
+  registeredFullLocation: "Nicholasville, Kentucky",
+  yardLocation: "Lincoln, CA",
+  yardFullLocation: "Lincoln, California",
   mcNumber: `MC#${import.meta.env.VITE_COMPANY_MC_NUM ?? "1234567"}`,
   dotNumber: `DOT#${import.meta.env.VITE_COMPANY_DOT_NUM ?? "1234567"}`,
   phoneDisplay: import.meta.env.VITE_COMPANY_PHONE_DISPLAY ?? "(555) 123-4567",
@@ -78,7 +80,7 @@ export const serviceCards: ServiceCard[] = [
 
 export const stats = [
   { icon: Truck, value: "10+", label: "Years in business" },
-  { icon: UsersRound, value: "4", label: "Power units and growing" },
-  { icon: MapPin, value: "Lincoln, CA", label: "Strategic hub for NorCal freight" },
+  { icon: UsersRound, value: "6", label: "Power units and growing" },
+  { icon: MapPin, value: "Lincoln, CA", label: "Office & yard for NorCal freight" },
   { icon: ShieldCheck, value: "Safety", label: "Our top priority" },
 ];

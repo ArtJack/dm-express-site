@@ -143,8 +143,8 @@ export function App() {
           </span>
         </a>
         <div className="brand-location" aria-label="Company location">
-          <strong>{company.fullLocation}</strong>
-          <span>Trucking & Logistics</span>
+          <strong>{company.registeredLocation}</strong>
+          <span>{company.yardLocation} Office & Yard</span>
         </div>
 
         <nav className="desktop-nav" aria-label="Main menu">
@@ -212,9 +212,10 @@ export function App() {
                 <span>Driving Success.</span>
               </h1>
               <p className="hero-lede">
-                DM Express is a trusted trucking and logistics partner based in
-                Lincoln, California. We deliver reliable capacity, dedicated lanes,
-                and driver-first opportunities that keep America moving.
+                DM Express is a trusted trucking and logistics partner officially
+                based and registered in {company.registeredFullLocation}, with an
+                office and yard in {company.yardFullLocation}. We deliver reliable
+                capacity, dedicated lanes, and driver-first opportunities that keep America moving.
               </p>
               <div className="hero-buttons">
                 <a className="primary-button" href="#services">
@@ -235,8 +236,8 @@ export function App() {
                 </div>
                 <div>
                   <MapPin size={31} aria-hidden="true" />
-                  <strong>{company.location}</strong>
-                  <span>Strategically located</span>
+                  <strong>{company.yardLocation}</strong>
+                  <span>Office & yard</span>
                 </div>
                 <div>
                   <UsersRound size={31} aria-hidden="true" />
@@ -269,8 +270,9 @@ export function App() {
             <p className="eyebrow">About DM Express</p>
             <h2 id="about-title">Built for the Road. Backed by Experience.</h2>
             <p>
-              For over a decade, DM Express has delivered dependable transportation
-              solutions with a driver-first mindset and customer-focused operations.
+              Registered in Kentucky and operating from a Lincoln, CA office and yard,
+              DM Express has delivered dependable transportation solutions with a
+              driver-first mindset and customer-focused operations for over a decade.
             </p>
           </div>
           <div className="stats-panel" data-reveal aria-label="Company stats">
@@ -415,7 +417,11 @@ export function App() {
               </a>
               <span>
                 <Building2 size={18} aria-hidden="true" />
-                {company.location}
+                Registered in {company.registeredLocation}
+              </span>
+              <span>
+                <MapPin size={18} aria-hidden="true" />
+                Office & yard in {company.yardLocation}
               </span>
             </div>
           </div>

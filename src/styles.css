@@ -8,8 +8,10 @@
   --muted: #b7bdc0;
   --soft: #d9dee0;
   --line: rgba(255, 255, 255, 0.16);
-  --accent: #f6ad19;
-  --accent-2: #83c6aa;
+  --accent: #32cd32;
+  --accent-on-dark: #32cd32;
+  --accent-contrast: #101418;
+  --accent-2: #45dc45;
   --danger: #ff856f;
   --shadow: 0 26px 70px rgba(0, 0, 0, 0.34);
   --radius: 6px;
@@ -24,6 +26,20 @@
   --strip-text: #fffaf0;
   --strip-muted: rgba(255, 250, 240, 0.72);
   --strip-card-hover: rgba(255, 255, 255, 0.05);
+  --hero-title: #fffaf0;
+  --hero-copy: rgba(255, 250, 240, 0.86);
+  --hero-muted: rgba(255, 250, 240, 0.72);
+  --hero-shade:
+    linear-gradient(90deg, rgba(5, 9, 12, 0.92), rgba(5, 9, 12, 0.62) 33%, rgba(5, 9, 12, 0.06) 72%),
+    linear-gradient(180deg, rgba(4, 8, 11, 0.08), rgba(4, 8, 11, 0.34) 65%, rgba(4, 8, 11, 0.62));
+  --hero-shade-mobile:
+    linear-gradient(90deg, rgba(9, 12, 15, 0.92), rgba(9, 12, 15, 0.72)),
+    linear-gradient(180deg, rgba(10, 13, 16, 0.12), rgba(10, 13, 16, 0.82));
+  --hero-secondary-text: #fffaf0;
+  --hero-secondary-bg: rgba(20, 25, 30, 0.62);
+  --hero-secondary-border: rgba(255, 255, 255, 0.28);
+  --hero-secondary-hover-bg: rgba(20, 25, 30, 0.78);
+  --hero-secondary-hover-border: var(--accent-on-dark);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -39,13 +55,34 @@
   --muted: #626c70;
   --soft: #2d3336;
   --line: rgba(16, 20, 24, 0.14);
-  --accent-2: #1f7a51;
+  --accent: #32cd32;
+  --accent-contrast: #101418;
+  --accent-2: #32cd32;
   --shadow: 0 24px 64px rgba(22, 26, 31, 0.12);
   --header-bg: rgba(255, 255, 255, 0.86);
   --header-text: #15191d;
   --footer-bg: #15191d;
   --footer-text: rgba(255, 250, 240, 0.78);
   --footer-strong: #fffaf0;
+  --strip-bg: #ffffff;
+  --strip-line: rgba(16, 20, 24, 0.14);
+  --strip-text: #15191d;
+  --strip-muted: #626c70;
+  --strip-card-hover: rgba(50, 205, 50, 0.08);
+  --hero-title: #11161a;
+  --hero-copy: rgba(17, 22, 26, 0.86);
+  --hero-muted: rgba(17, 22, 26, 0.68);
+  --hero-shade:
+    linear-gradient(90deg, rgba(246, 245, 241, 0.94), rgba(246, 245, 241, 0.64) 28%, rgba(246, 245, 241, 0.12) 45%, rgba(246, 245, 241, 0) 62%),
+    linear-gradient(180deg, rgba(246, 245, 241, 0.08), rgba(246, 245, 241, 0) 62%, rgba(246, 245, 241, 0.04));
+  --hero-shade-mobile:
+    linear-gradient(90deg, rgba(246, 245, 241, 0.76), rgba(246, 245, 241, 0.5)),
+    linear-gradient(180deg, rgba(246, 245, 241, 0.36), rgba(246, 245, 241, 0.2) 58%, rgba(246, 245, 241, 0.28));
+  --hero-secondary-text: #15191d;
+  --hero-secondary-bg: rgba(255, 255, 255, 0.62);
+  --hero-secondary-border: rgba(16, 20, 24, 0.3);
+  --hero-secondary-hover-bg: rgba(255, 255, 255, 0.86);
+  --hero-secondary-hover-border: var(--accent);
 }
 
 * {
@@ -71,7 +108,7 @@ body {
 body::selection,
 ::selection {
   background: var(--accent);
-  color: #101418;
+  color: var(--accent-contrast);
 }
 
 a {
@@ -99,7 +136,7 @@ img {
   z-index: 100;
   padding: 12px 18px;
   background: var(--accent);
-  color: #101418;
+  color: var(--accent-contrast);
   font-weight: 800;
   border-radius: var(--radius);
   transition: top 180ms ease;
@@ -178,7 +215,7 @@ img {
 }
 
 .brand-copy strong {
-  color: var(--header-text);
+  color: var(--accent);
   font-size: 2rem;
   letter-spacing: 0;
 }
@@ -270,7 +307,7 @@ img {
 .primary-button {
   background: var(--accent);
   border-color: var(--accent);
-  color: #111417;
+  color: var(--accent-contrast);
   font-weight: 900;
 }
 
@@ -286,23 +323,29 @@ img {
 }
 
 .secondary-button {
-  color: #fffaf0;
-  background: rgba(20, 25, 30, 0.62);
-  border-color: rgba(255, 255, 255, 0.28);
+  color: var(--hero-secondary-text);
+  background: var(--hero-secondary-bg);
+  border-color: var(--hero-secondary-border);
   font-weight: 800;
+}
+
+.hero .primary-button {
+  background: var(--accent-on-dark);
+  border-color: var(--accent-on-dark);
+  color: #101418;
 }
 
 .icon-button:hover,
 .call-button:hover,
 .primary-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(246, 173, 25, 0.28);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 .secondary-button:hover {
   transform: translateY(-2px);
-  background: rgba(20, 25, 30, 0.78);
-  border-color: var(--accent);
+  background: var(--hero-secondary-hover-bg);
+  border-color: var(--hero-secondary-hover-border);
 }
 
 .icon-button:focus-visible,
@@ -381,9 +424,7 @@ textarea:focus-visible {
 
 .hero-shade {
   z-index: -2;
-  background:
-    linear-gradient(90deg, rgba(5, 9, 12, 0.92), rgba(5, 9, 12, 0.62) 33%, rgba(5, 9, 12, 0.06) 72%),
-    linear-gradient(180deg, rgba(4, 8, 11, 0.08), rgba(4, 8, 11, 0.34) 65%, rgba(4, 8, 11, 0.62));
+  background: var(--hero-shade);
 }
 
 .hero-content {
@@ -413,7 +454,7 @@ p {
 }
 
 h1 {
-  color: #fffaf0;
+  color: var(--hero-title);
   max-width: 650px;
   margin-bottom: 20px;
   font-size: clamp(2.4rem, 3.55vw, 3.85rem);
@@ -424,11 +465,11 @@ h1 {
 
 h1 span {
   display: block;
-  color: var(--accent);
+  color: var(--accent-on-dark);
 }
 
 .hero-lede {
-  color: rgba(255, 250, 240, 0.86);
+  color: var(--hero-copy);
   max-width: 560px;
   font-size: clamp(1rem, 1.12vw, 1.15rem);
   line-height: 1.5;
@@ -462,16 +503,16 @@ h1 span {
 
 .hero-proof svg {
   grid-row: 1 / 3;
-  color: var(--accent);
+  color: var(--accent-on-dark);
 }
 
 .hero-proof strong {
-  color: #fffaf0;
+  color: var(--hero-title);
   text-transform: uppercase;
 }
 
 .hero-proof span {
-  color: rgba(255, 250, 240, 0.72);
+  color: var(--hero-muted);
   font-size: 0.72rem;
   text-transform: uppercase;
 }
@@ -483,7 +524,7 @@ h1 span {
   margin: -110px 0 0;
   position: relative;
   z-index: 3;
-  border-top: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent-on-dark) 38%, transparent);
   border-bottom: 1px solid var(--strip-line);
   background: var(--strip-bg);
 }
@@ -502,12 +543,15 @@ h1 span {
   border-right: 0;
 }
 
-.service-card svg,
 .card-icon,
 .yard-copy li svg,
 .contact-card svg,
 .pay-note svg {
   color: var(--accent);
+}
+
+.service-card svg {
+  color: var(--accent-on-dark);
 }
 
 .service-card h2 {
@@ -534,7 +578,7 @@ h1 span {
   bottom: 10px;
   display: inline-flex;
   margin-top: 0;
-  color: var(--accent);
+  color: var(--accent-on-dark);
   font-size: 1.2rem;
 }
 
@@ -853,7 +897,7 @@ h2 {
 }
 
 .segmented-control button.active {
-  color: #111417;
+  color: var(--accent-contrast);
   background: var(--accent);
 }
 
@@ -1187,9 +1231,7 @@ textarea::placeholder {
   }
 
   .hero-shade {
-    background:
-      linear-gradient(90deg, rgba(9, 12, 15, 0.92), rgba(9, 12, 15, 0.72)),
-      linear-gradient(180deg, rgba(10, 13, 16, 0.12), rgba(10, 13, 16, 0.82));
+    background: var(--hero-shade-mobile);
   }
 
   h1 {
