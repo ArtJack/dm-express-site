@@ -11,10 +11,25 @@
     <meta name="theme-color" content="#101418" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)" />
     <meta name="robots" content="index,follow" />
-    <link rel="canonical" href="https://dmexpress.example.com/" />
+    <link rel="canonical" href="%VITE_COMPANY_URL%/" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("dm-theme");
+          var theme =
+            saved === "light" || saved === "dark"
+              ? saved
+              : window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+          document.documentElement.dataset.theme = theme;
+        } catch (e) {}
+      })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,8 +50,8 @@
       property="og:description"
       content="Trusted trucking and logistics partner. Dedicated lanes, driver-first opportunities, parking, repairs, trailer rentals, and lease-to-own."
     />
-    <meta property="og:url" content="https://dmexpress.example.com/" />
-    <meta property="og:image" content="https://dmexpress.example.com/assets/dm-express-hero-volvo.jpg" />
+    <meta property="og:url" content="%VITE_COMPANY_URL%/" />
+    <meta property="og:image" content="%VITE_COMPANY_URL%/assets/dm-express-hero-volvo.jpg" />
     <meta property="og:image:alt" content="DM Express Volvo-style semi truck in a logistics yard" />
     <meta property="og:locale" content="en_US" />
 
@@ -46,17 +61,17 @@
       name="twitter:description"
       content="Dedicated lanes, driver-first opportunities, parking, repairs, trailer rentals, and lease-to-own equipment."
     />
-    <meta name="twitter:image" content="https://dmexpress.example.com/assets/dm-express-hero-volvo.jpg" />
+    <meta name="twitter:image" content="%VITE_COMPANY_URL%/assets/dm-express-hero-volvo.jpg" />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "MovingCompany",
         "name": "DM Express",
-        "url": "https://dmexpress.example.com/",
-        "image": "https://dmexpress.example.com/assets/dm-express-hero-volvo.jpg",
-        "telephone": "+15551234567",
-        "email": "hello@dmexpress.example.com",
+        "url": "%VITE_COMPANY_URL%/",
+        "image": "%VITE_COMPANY_URL%/assets/dm-express-hero-volvo.jpg",
+        "telephone": "%VITE_COMPANY_PHONE_E164%",
+        "email": "%VITE_COMPANY_EMAIL%",
         "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
@@ -69,8 +84,8 @@
           "name": "California and the contiguous United States"
         },
         "identifier": [
-          { "@type": "PropertyValue", "name": "MC", "value": "1234567" },
-          { "@type": "PropertyValue", "name": "DOT", "value": "1234567" }
+          { "@type": "PropertyValue", "name": "MC", "value": "%VITE_COMPANY_MC_NUM%" },
+          { "@type": "PropertyValue", "name": "DOT", "value": "%VITE_COMPANY_DOT_NUM%" }
         ],
         "sameAs": []
       }

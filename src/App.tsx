@@ -200,8 +200,8 @@ export function App() {
               alt="A black Volvo-style semi truck with a dry van trailer in a professional logistics yard"
               width="2000"
               height="1333"
-              fetchPriority="high"
               decoding="async"
+              {...{ fetchpriority: "high" }}
             />
           </div>
           <div className="hero-shade" aria-hidden="true" />
