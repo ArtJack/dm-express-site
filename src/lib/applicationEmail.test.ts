@@ -14,7 +14,7 @@ describe("application email helpers", () => {
     expect(getPayLine("Owner Operator")).toContain("90%");
   });
 
-  it("builds a driver application email body with license file reminders", () => {
+  it("builds a driver application email body", () => {
     const email = buildApplicationEmail({
       applicantType: "Driver",
       fields: {
@@ -28,15 +28,13 @@ describe("application email helpers", () => {
         startDate: "2026-05-01",
         message: "Ready to start.",
       },
-      licenseFrontName: "front.pdf",
-      licenseBackName: "back.pdf",
     });
 
     expect(email.subject).toBe("DM Express Driver Application - Alex Driver");
     expect(email.body).toContain("Applicant type: Driver");
     expect(email.body).toContain("Pay option shown: Drivers are paid 30% from gross.");
-    expect(email.body).toContain("License front file selected: front.pdf");
-    expect(email.body).toContain("attach the selected driver license front and back files");
+    expect(email.body).toContain("Preferred lanes: Dedicated lanes");
+    expect(email.body).toContain("Message: Ready to start.");
   });
 
   it("encodes mailto subject and body safely", () => {
@@ -131,8 +129,6 @@ describe("BVA: buildApplicationEmail field length boundaries", () => {
     const { subject, body } = buildApplicationEmail({
       applicantType: "Driver",
       fields: baseFields,
-      licenseFrontName: "f.png",
-      licenseBackName: "b.png",
     });
     expect(subject).toBe("DM Express Driver Application - Tester");
     expect(body).toContain("Phone: ");
@@ -145,8 +141,6 @@ describe("BVA: buildApplicationEmail field length boundaries", () => {
     const { body } = buildApplicationEmail({
       applicantType: "Owner Operator",
       fields: { ...baseFields, message: longMessage },
-      licenseFrontName: "f.png",
-      licenseBackName: "b.png",
     });
     expect(body).toContain(longMessage);
   });
@@ -156,8 +150,6 @@ describe("BVA: buildApplicationEmail field length boundaries", () => {
     const { body } = buildApplicationEmail({
       applicantType: "Driver",
       fields: { ...baseFields, message: tricky },
-      licenseFrontName: "f.png",
-      licenseBackName: "b.png",
     });
     expect(body).toContain(tricky);
   });
@@ -183,8 +175,6 @@ describe("DT: subject and pay line by applicantType", () => {
     const { subject, body } = buildApplicationEmail({
       applicantType: type,
       fields,
-      licenseFrontName: "f",
-      licenseBackName: "b",
     });
     expect(subject).toBe(expectedSubject);
     expect(body).toContain(expectedPay);

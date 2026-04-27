@@ -2,7 +2,6 @@ import type { LucideIcon } from "lucide-react";
 import {
   Handshake,
   KeyRound,
-  MapPin,
   ParkingCircle,
   Route,
   ShieldCheck,
@@ -81,6 +80,5 @@ export const serviceCards: ServiceCard[] = [
 export const stats = [
   { icon: Truck, value: "10+", label: "Years in business" },
   { icon: UsersRound, value: "6", label: "Power units and growing" },
-  { icon: MapPin, value: "Lincoln, CA", label: "Office & yard for NorCal freight" },
   { icon: ShieldCheck, value: "Safety", label: "Our top priority" },
 ];

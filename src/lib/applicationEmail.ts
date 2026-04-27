@@ -17,8 +17,6 @@ export type ApplicationFormFields = {
 export type BuildApplicationEmailInput = {
   applicantType: ApplicantType;
   fields: ApplicationFormFields;
-  licenseFrontName: string;
-  licenseBackName: string;
 };
 
 export function getPayLine(applicantType: ApplicantType) {
@@ -44,8 +42,6 @@ export function readApplicationFormFields(form: FormData): ApplicationFormFields
 export function buildApplicationEmail({
   applicantType,
   fields,
-  licenseFrontName,
-  licenseBackName,
 }: BuildApplicationEmailInput) {
   const subject = `DM Express ${applicantType} Application - ${fields.name}`;
   const body = [
@@ -59,10 +55,6 @@ export function buildApplicationEmail({
     `Equipment: ${fields.equipment}`,
     `Preferred lanes: ${fields.lanes}`,
     `Available start date: ${fields.startDate}`,
-    `License front file selected: ${licenseFrontName}`,
-    `License back file selected: ${licenseBackName}`,
-    "",
-    "Important: please attach the selected driver license front and back files to this email before sending.",
     "",
     `Message: ${fields.message}`,
   ].join("\n");

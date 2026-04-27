@@ -18,7 +18,6 @@ import {
   UsersRound,
   X,
 } from "lucide-react";
-import { UploadBox } from "./components/UploadBox";
 import {
   applicantTypes,
   ApplicantType,
@@ -29,8 +28,6 @@ import {
 } from "./lib/applicationEmail";
 import { company, navItems, serviceCards, stats } from "./siteContent";
 
-type FileSlot = "licenseFront" | "licenseBack";
-
 export function App() {
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window === "undefined") return "dark";
@@ -40,10 +37,6 @@ export function App() {
   });
   const [menuOpen, setMenuOpen] = useState(false);
   const [applicantType, setApplicantType] = useState<ApplicantType>("Driver");
-  const [licenseFiles, setLicenseFiles] = useState<Record<FileSlot, File | null>>({
-    licenseFront: null,
-    licenseBack: null,
-  });
   const [formStatus, setFormStatus] = useState("");
   const headerRef = useRef<HTMLElement | null>(null);
 
@@ -100,29 +93,17 @@ export function App() {
   const payLine = useMemo(() => getPayLine(applicantType), [applicantType]);
   const todayIso = useMemo(() => new Date().toISOString().slice(0, 10), []);
 
-  function handleFile(slot: FileSlot, fileList: FileList | null) {
-    setLicenseFiles((current) => ({ ...current, [slot]: fileList?.[0] ?? null }));
-    setFormStatus("");
-  }
-
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
 
-    if (!licenseFiles.licenseFront || !licenseFiles.licenseBack) {
-      setFormStatus("Please upload both the front and back of the driver license before sending.");
-      return;
-    }
-
     const { subject, body } = buildApplicationEmail({
       applicantType,
       fields: readApplicationFormFields(form),
-      licenseFrontName: licenseFiles.licenseFront.name,
-      licenseBackName: licenseFiles.licenseBack.name,
     });
 
     window.location.href = createMailtoHref(company.email, subject, body);
-    setFormStatus("Email draft opened. Attach the selected license images before sending.");
+    setFormStatus("Email draft opened. Review the application details before sending.");
   }
 
   return (
@@ -403,8 +384,8 @@ export function App() {
             <p className="eyebrow">Apply now</p>
             <h2 id="apply-title">Send your driver or owner operator application.</h2>
             <p>
-              Choose the application type, add your contact and equipment details, then upload
-              the front and back of your driver license before sending.
+              Choose the application type, add your contact and equipment details, then send
+              the application directly to DM Express.
             </p>
             <div className="contact-card">
               <a href={company.phoneHref}>
@@ -499,7 +480,7 @@ export function App() {
               <input
                 name="equipment"
                 type="text"
-                placeholder={applicantType === "Owner Operator" ? "Truck year/model, trailer, plates" : "Endorsements, preferred truck type"}
+                placeholder={applicantType === "Owner Operator" ? "Truck year/model, trailer" : "Endorsements, preferred truck type"}
               />
             </label>
 
@@ -507,22 +488,6 @@ export function App() {
               Preferred lanes
               <input name="lanes" type="text" placeholder="Lanes, regions, home time" />
             </label>
-
-            <fieldset className="upload-grid" aria-label="Driver license upload fields">
-              <legend className="visually-hidden">Driver license upload</legend>
-              <UploadBox
-                id="licenseFront"
-                label="Driver license front"
-                file={licenseFiles.licenseFront}
-                onChange={(fileList) => handleFile("licenseFront", fileList)}
-              />
-              <UploadBox
-                id="licenseBack"
-                label="Driver license back"
-                file={licenseFiles.licenseBack}
-                onChange={(fileList) => handleFile("licenseBack", fileList)}
-              />
-            </fieldset>
 
             <label>
               Message
